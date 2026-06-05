@@ -21,10 +21,14 @@ class ChapterViewset(viewsets.ModelViewSet):
     serializer_class = ChapterSerializer
 
     def get_queryset(self):
+        qs = Chapter.objects.all()
         course_id = self.request.query_params.get("course")
         if course_id:
-            return Chapter.objects.filter(course=course_id)
-        return Chapter.objects.all()
+            qs = qs.filter(course=course_id)
+        # Students only see public chapters; instructors see all
+        if getattr(self.request.user, "role", None) == "student":
+            qs = qs.filter(is_public=True)
+        return qs
 
 class EnrollmentViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
