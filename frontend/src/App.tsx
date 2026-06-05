@@ -6,6 +6,7 @@ import StudentDashboard from "./components/StudentDashboard";
 import CoursePage from "./components/CoursePage";
 import ChapterEditor from "./components/ChapterEditor";
 import StudentCoursePage from "./components/StudentCoursePage";
+import StudentChapterView from "./components/StudentChapterView";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="/instructor/course/:id" element={<CoursePage />} />
       <Route path="/instructor/chapter/:id" element={<ChapterEditor />} />
       <Route path="/student/course/:id" element={<StudentCoursePage />} />
+      <Route path="/student/chapter/:id" element={<StudentChapterView />} />
     </Routes>
   );
 }
