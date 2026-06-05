@@ -11,9 +11,14 @@ class CourseViewset(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
+    def get_queryset(self):
+        user = self.request.user
+        if getattr(user, "role", None) == "instructor":
+            return Course.objects.filter(instructor=user)
+        return Course.objects.all()  # students see all courses to browse/join
+
     def perform_create(self, serializer):
         serializer.save(instructor=self.request.user)
-
 
 class ChapterViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
