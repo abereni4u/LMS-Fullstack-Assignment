@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .views import *
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-]
+router = DefaultRouter()
+router.register('course', CourseViewset, basename='course')
+
+urlpatterns = router.urls
+
 
