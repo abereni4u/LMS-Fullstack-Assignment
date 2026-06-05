@@ -18,10 +18,17 @@ from django.contrib import admin
 from django.urls import path
 from .views import *
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
+from django.contrib.auth.decorators import login_required
 
 router = DefaultRouter()
 router.register('course', CourseViewset, basename='course')
+router.register('chapter', ChapterViewset, basename='chapter')
+router.register('enrollment', EnrollmentViewset, basename='enrollment')
 
-urlpatterns = router.urls
+
+urlpatterns = [
+    path('login/', obtain_auth_token),
+] + router.urls
 
 
