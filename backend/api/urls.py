@@ -29,6 +29,7 @@ router.register('enrollment', EnrollmentViewset, basename='enrollment')
 
 urlpatterns = [
     path('login/', obtain_auth_token),
+    path('me/', current_user),
 ] + router.urls
 
 
