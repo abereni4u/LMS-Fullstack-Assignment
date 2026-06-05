@@ -20,6 +20,11 @@ class ChapterViewset(viewsets.ModelViewSet):
     queryset = Chapter.objects.all()
     serializer_class = ChapterSerializer
 
+    def get_queryset(self):
+        course_id = self.request.query_params.get("course")
+        if course_id:
+            return Chapter.objects.filter(course=course_id)
+        return Chapter.objects.all()
 
 class EnrollmentViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
