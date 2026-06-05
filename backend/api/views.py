@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
+from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 from .models import *
 from rest_framework.response import Response
 
-class CourseViewset(viewsets.Viewset):
+class CourseViewset(viewsets.ViewSet):
     permissions = [IsAuthenticated]
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
